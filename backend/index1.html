@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Player with Live Chat</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #212d40;
+      }
+      .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 20px;
+        background-color: #212d40;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .video-container {
+        flex: 1;
+        margin-right: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+      }
+      .video-container video {
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .chat-container {
+        flex: 0 0 300px;
+        height: 640px;
+        background-color: #c4d9e5;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+      }
+      .chat-message {
+        position: relative;
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      #empty {
+        height: 500px;
+      }
+      #chat-form {
+        position: relative;
+        bottom: 0;
+        margin-top: 20px;
+      }
+      #message-input {
+        width: calc(100% - 60px);
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-right: 10px;
+      }
+      #message-input:focus {
+        outline: none;
+        border-color: #6c63ff;
+      }
+      #message-input::placeholder {
+        color: #999;
+      }
+      button[type="submit"] {
+        padding: 10px 20px;
+        background-color: #6c63ff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      button[type="submit"]:hover {
+        background-color: #564fbf;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="video-container">
+        <video muted id="videoPlayer" controls width="640" height="480">
+          <source
+            src="video/20600550-uhd_3840_2160_30fps.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="chat-container" id="chatContainer">
+        <h2 style="margin-bottom: 20px">Live Chat</h2>
+        <!-- Existing chat messages here -->
+        <div id="empty"></div>
+        <form id="chat-form">
+          <input
+            type="text"
+            id="message-input"
+            placeholder="Type your message..."
+          />
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const chatContainer = document.getElementById("chatContainer");
+      const videoPlayer = document.getElementById("videoPlayer");
+      const ws = new WebSocket("ws://localhost:8080/ws");
+
+      ws.onmessage = function (event) {
+        const message = event.data;
+        // console.log(message)
+        const jsond = JSON.parse(message);
+        console.log(jsond);
+        // Check if the message is 'play' and play the video
+        if (jsond.action === "play") {
+          videoPlayer.play();
+        } else if (jsond.action === "pause") {
+          videoPlayer.pause();
+        }
+
+        // Add the received message to the chat container
+        const chatMessage = document.createElement("div");
+        chatMessage.classList.add("chat-message");
+        chatMessage.textContent = message;
+        chatContainer.appendChild(chatMessage);
+      };
+
+      // Send message from chat form
+      document
+        .getElementById("chat-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const messageInput = document.getElementById("message-input");
+          const message = messageInput.value;
+          ws.send(message);
+          messageInput.value = "";
+        });
+
+      videoPlayer.addEventListener("play", function () {
+        // Create JSON data with the action "play"
+        const playData = JSON.stringify({ action: "play" });
+        // Send the JSON data to the WebSocket
+        ws.send(playData);
+      });
+
+      // Add event listener to the pause button
+      videoPlayer.addEventListener("pause", function () {
+        // Create JSON data with the action "pause"
+        const pauseData = JSON.stringify({ action: "pause" });
+        // Send the JSON data to the WebSocket
+        ws.send(pauseData);
+      });
+    </script>
+  </body>
+</html>

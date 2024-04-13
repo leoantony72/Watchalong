@@ -1,0 +1,57 @@
+body{
+    padding-top: 10%;
+    padding-bottom: 10%;
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:white;
+}
+
+.signup{
+    background-color: #2A6F97;
+    padding: 10px;
+    height: 605px;
+    width: 300px;
+    opacity: 95%;
+    border-radius: 10px;
+    color:white;
+
+}
+h2{
+    text-align: center ;
+    font-family: sans-serif;
+    color:white;
+}
+h4{
+    text-align: left ;
+    font-family: sans-serif;
+    color:white;
+}
+input{
+    text-size-adjust: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: rgba(180, 180, 180, 0.534);
+    height: 25px;
+    width: 92%;
+    color:white;
+}
+button{
+    height: 35px;
+    width: 300px;
+    border: none;
+    border-radius: 10px;
+    background-color: #212D40;
+    color:white;
+}
+button:hover{
+    background-color: rgb(78, 13, 13) (1, 110, 1);
+    color:white;
+}

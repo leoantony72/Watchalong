@@ -1,0 +1,33 @@
+.container {
+    display: flex; /* Arrange elements horizontally */
+    width: 100vw; /* Take up full viewport width */
+    height: 100vh; /* Take up full viewport height */
+  }
+  
+  .video-player {
+    flex: 2; /* Take up 2/3 of the container space */
+  }
+  
+  .chat-panel {
+    flex: 1; /* Take up 1/3 of the container space */
+    background-color: #f0f0f0;
+    padding: 10px;
+    overflow-y: scroll; /* Enable scrolling for chat messages */
+  }
+  
+  .chat-messages {
+    height: calc(100vh - 100px); /* Adjust height for chat content */
+    margin-bottom: 10px;
+  }
+  
+  #chat-form {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  #chat-form input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  

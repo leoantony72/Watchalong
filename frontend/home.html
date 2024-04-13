@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 6</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    
+    <script type="text/javascript">
+        // Simple example without additional libraries (limited control)
+
+const carousel = document.querySelector('.carousel');
+const images = carousel.querySelectorAll('img');
+
+let currentSlide = 0;
+
+function moveCarousel() {
+  currentSlide++;
+  if (currentSlide >= images.length) {
+    currentSlide = 0;
+  }
+  carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+}
+
+setInterval(moveCarousel, 2000); // Change interval (ms) to adjust speed 
+
+    </script>
+
+    <style>
+     .my-box {
+      width: 210px;
+      height: 55px;
+      background: #00267f;
+      border: 1px solid black;
+      padding: 10px;
+      margin: 10px;
+      color: aliceblue;
+    }
+    .continue {
+      width: 290px;
+      height: 55px;
+      background: #00267f;
+      border: 1px solid black;
+      padding: 10px;
+      margin: 10px;
+      color: aliceblue;
+    }
+    .recomend {
+      width: 290px;
+      height: 55px;
+      background: #00267f;
+      border: 1px solid black;
+      padding: 10px;
+      margin: 10px;
+      color: aliceblue;
+    }
+    .carousel-container {
+  width: 500px; /* Adjust width as needed */
+  height: 400px; /* Adjust height as needed */
+  margin: 0 auto; /* Center the container horizontally */
+  overflow: hidden; /* Hide overflowing content */
+}
+
+.carousel {
+  display: flex;
+  animation: slide 3s infinite linear;
+}
+
+@keyframes slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.carousel img {
+  width: 100%; /* Images will fill the carousel width */
+  animation: forwards; /* Inherit animation from the carousel */
+}
+    .carousel-container {
+  width: 500px; /* Adjust width as needed */
+  height: 400px; /* Adjust height as needed */
+  margin: 0 auto; /* Center the container horizontally */
+  overflow: hidden; /* Hide overflowing content */
+}
+
+.carousel {
+  display: flex;
+  animation: slide 3s infinite linear;
+}
+
+@keyframes slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.carousel img {
+  width: 100%; /* Images will fill the carousel width */
+  animation: forwards; /* Inherit animation from the carousel */
+}
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="lucidlogo.png" width="90" height="110"  alt="">
+            </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button> 
+          <div class="collapse navbar-collapse d-flex " id="navbarSupportedContent" >
+            <ul class="navbar-nav  mb-2 mb-lg-0">
+              <li class="nav-item ">
+                <a class="nav-link active" aria-current="page" href="home.html"><h1>L U C I D</h1></a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ms-auto justify-content-end mb-2 mb-lg-0">
+                <li class="nav-item ">
+                  <a class="nav-link active" aria-current="page" href="home.html"><h5>Watchlist</h5></a>
+                </li>
+                <ul class="navbar-nav  mb-2 mb-lg-0">
+                    <li class="nav-item ">
+                      <a class="nav-link active" aria-current="page" href="home.html"><h5>Topcharts</h5></a>
+                    </li>
+                  </ul>
+                  <ul class="navbar-nav  mb-2 mb-lg-0">
+                    <li class="nav-item ">
+                      <a class="nav-link active" aria-current="page" href="home.html"><h5>Playlist</h5</a>
+                    </li>
+                  </ul>
+              </ul>
+          </div> 
+        </div>
+    </nav>
+
+    <div class="my-box">
+        <h3>Watch Party +</h3>
+    </div>
+    
+
+    <div class="carousel-party">
+        <div class="carousel">
+          <img src="download.png" alt="Image 1">
+          <img src="download.png" alt="Image 2">
+          <img src="download.png" alt="Image 3">
+        </div>
+    </div>
+
+      <div class="continue">
+        <h3>Countinue Watching</h3>
+    </div>
+
+    <div class="carousel-continue">
+        <div class="carousel">
+          <img src="download.png" alt="Image 1">
+          <img src="download.png" alt="Image 2">
+          <img src="download.png" alt="Image 3">
+        </div>
+    </div>
+
+    <div class="recomend">
+        <h3>Top 10 Recomended</h3>
+    </div>
+       
+    <div class="carousel-recomend">
+        <div class="carousel">
+          <img src="download.png" alt="Image 1">
+          <img src="download.png" alt="Image 2">
+          <img src="download.png" alt="Image 3">
+        </div>
+    </div>
+    
+       
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
+</html>
