@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"github.com/gorilla/websocket"
 )
 
@@ -19,7 +20,8 @@ var upgrader = websocket.Upgrader{
 }
 
 func Wshandler(w http.ResponseWriter, r *http.Request, c *gin.Context) {
-	userID := c.Query("id")
+	// userID := c.Query("id")
+	userID := uuid.New().String()
 	upgrader.CheckOrigin = func(r *http.Request) bool { return true }
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
@@ -40,6 +42,15 @@ func Wshandler(w http.ResponseWriter, r *http.Request, c *gin.Context) {
 func NewClient(userId string, conn *websocket.Conn) {
 	clients[userId] = conn
 	clients[userId].WriteMessage(websocket.TextMessage, []byte("ok"))
+}
+
+func Closews(msg string, conn *websocket.Conn, userId string) {
+	cm := websocket.FormatCloseMessage(websocket.CloseNormalClosure, msg)
+	if err := conn.WriteMessage(websocket.CloseMessage, cm); err != nil {
+		fmt.Println(err)
+	}
+	delete(clients, userId)
+	conn.Close()
 }
 
 type Message struct {
@@ -72,8 +83,9 @@ func Send() {
 		msg := <-broadcast
 		fmt.Println("message SEND:", msg)
 		for i, conn := range clients {
-			fmt.Println("connection: ",i)
+			fmt.Println("connection: ", i)
 			jsonData, _ := json.Marshal(msg)
+			fmt.Println("message json: ", jsonData)
 			conn.WriteMessage(websocket.TextMessage, jsonData)
 		}
 	}

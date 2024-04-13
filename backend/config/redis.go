@@ -12,8 +12,8 @@ var ctx = context.Background()
 func StartRedis() *redis.Client {
 	//redis://default:NJyAwKlsk74nEexqpAHRnCsXLoJmH2Uq@redis-15751.c100.us-east-1-4.ec2.cloud.redislabs.com:15751
 	redis := redis.NewClient(&redis.Options{
-		Addr:     "redis-15751.c100.us-east-1-4.ec2.cloud.redislabs.com:15751",
-		Password: "NJyAwKlsk74nEexqpAHRnCsXLoJmH2Uq",
+		Addr:     "localhost:6379",
+		Password: "",
 		DB:       0,
 	})
 

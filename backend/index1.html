@@ -115,7 +115,7 @@
     <script>
       const chatContainer = document.getElementById("chatContainer");
       const videoPlayer = document.getElementById("videoPlayer");
-      const ws = new WebSocket("ws://localhost:8080/ws");
+      const ws = new WebSocket("ws://192.168.18.11:8080/ws");
 
       ws.onmessage = function (event) {
         const message = event.data;
@@ -161,6 +161,16 @@
         // Send the JSON data to the WebSocket
         ws.send(pauseData);
       });
+
+      // videoPlayer.addEventListener("click", playVideo);
+      // videoPlayer.addEventListener("touchstart", playVideo);
+
+      // function playVideo() {
+      //   // Create JSON data with the action "play"
+      //   const playData = JSON.stringify({ action: "play" });
+      //   // Send the JSON data to the WebSocket
+      //   ws.send(playData);
+      // }
     </script>
   </body>
 </html>

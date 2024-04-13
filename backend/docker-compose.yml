@@ -1,0 +1,17 @@
+version: "3.6"
+services:
+  redis:
+    container_name: "tw_redis"
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - db:/var/lib/redis/data
+    logging:
+      driver: none
+networks:
+  default:
+    external:
+      name: tt
+volumes:
+  db:
